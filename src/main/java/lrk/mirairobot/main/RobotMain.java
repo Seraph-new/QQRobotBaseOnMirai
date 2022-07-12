@@ -10,7 +10,7 @@ import lrk.mirairobot.main.RobotNotification;
 import java.io.*;
 import java.util.*;
 public class RobotMain implements Listener {
-	public static String Name = "RobotMain";
+	public static String Name = "RobotTester";
 
     @EventHandler
     public void onEvent(Event event) {

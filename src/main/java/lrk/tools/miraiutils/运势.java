@@ -68,7 +68,7 @@ public class 运势 implements Utils{
             }
         }
         //绘制Text
-        g.setFont(new Font("微软雅黑",Font.BOLD,25));
+        g.setFont(new Font("MiSans",Font.BOLD,25));
         g.setColor(text_color);
         drawString_s(g,85,200,祝福);
         return image;

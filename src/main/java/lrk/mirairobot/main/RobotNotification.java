@@ -13,7 +13,7 @@ import java.util.Date;
 public class RobotNotification
 {
 	public static Mode mode;
-	private static Logger logger = Logger.getLogger("Botlog");
+	private static Logger logger = Logger.getLogger("RobotLog");
 	private static ConsoleHandler consolehander;
 	private static FileHandler filehander;
 	private static RobotLogFormater formatter;

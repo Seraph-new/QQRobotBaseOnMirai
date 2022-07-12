@@ -5,6 +5,7 @@ import lrk.mirairobot.core.data.*;
 import lrk.mirairobot.utils.*;
 import lrk.mirairobot.core.event.*;
 import lrk.mirairobot.main.threads.RobotThread;
+import lrk.mirairobot.main.*;
 
 import java.lang.*;
 import java.io.*;
@@ -21,7 +22,7 @@ public class FriendMessageThread extends RobotThread{
 		try{
 			main();
 		}catch(IOException e1){
-			System.out.println(e1.getMessage());
+			RobotNotification.Warnning(e1.toString());
 		}
 	}
 	private void main() throws IOException{

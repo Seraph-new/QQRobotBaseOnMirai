@@ -24,7 +24,7 @@ public class GroupMessageEvent extends MessageEvent {
     private long messageId;
     // 消息发送时间(所有消息类型均有)
     private long messageTime;
-
+	
     //@ 到的用户ID
     private ArrayList<Long> atUsers = new ArrayList<Long>();
     //消息中的图片

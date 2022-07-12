@@ -137,10 +137,16 @@ public class DataBridge
         } catch (FileNotFoundException e) {}
         return out;
     }
+	// public static String getImage(Utils util) throws IOException{
+	    // File image = new File(HOME.getPath()+"/tmp/"+System.currentTimeMillis()+".png");
+	    // ImageIO.write(util.getImage(),"png",openFileOutput(image.getPath(),false));
+	    // util.dispose();
+	    // return getFileBase64(image.getPath());
+	// }
 	public static String getImage(Utils util) throws IOException{
-	    File image = new File(HOME.getPath()+"/tmp/"+System.currentTimeMillis()+".png");
-	    ImageIO.write(util.getImage(),"png",openFileOutput(image.getPath(),false));
-	    util.dispose();
-	    return getFileBase64(image.getPath());
+		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+		ImageIO.write(util.getImage(), "jpeg", buffer);
+		util.dispose();
+		return Base64.getEncoder().encodeToString(buffer.toByteArray());
 	}
 }

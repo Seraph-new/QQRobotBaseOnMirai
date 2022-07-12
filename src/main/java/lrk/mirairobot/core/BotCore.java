@@ -56,13 +56,15 @@ public class BotCore{
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
         connection.setRequestProperty("Charset", "UTF-8");
-        connection.setRequestProperty("Connection", "Keep-Alive");
+        //connection.setRequestProperty("Connection", "Keep-Alive");
         connection.setUseCaches(false);
         JsonObject data = new JsonObject();
         data.addProperty("verifyKey",verifyKey);
         connection.setDoOutput(true);
         connection.getOutputStream().write(data.toString().getBytes(StandardCharsets.UTF_8));
-        return (String)JsonParser.parseReader(new InputStreamReader(connection.getInputStream())).getAsJsonObject().get("session").toString().replace("\"","");
+        String result = (String)JsonParser.parseReader(new InputStreamReader(connection.getInputStream())).getAsJsonObject().get("session").toString().replace("\"","");
+        connection.disconnect();
+        return result;
 	}
 	//绑定SessionKey和QQ
 	private String bind() throws IOException,MalformedURLException,ProtocolException{
@@ -71,14 +73,16 @@ public class BotCore{
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
         connection.setRequestProperty("Charset", "UTF-8");
-        connection.setRequestProperty("Connection", "Keep-Alive");
+        //connection.setRequestProperty("Connection", "Keep-Alive");
         connection.setUseCaches(false);
         JsonObject data = new JsonObject();
         data.addProperty("sessionKey",session);
         data.addProperty("qq",qq);
         connection.setDoOutput(true);
         connection.getOutputStream().write(data.toString().getBytes(StandardCharsets.UTF_8));
-        return (String)JsonParser.parseReader(new InputStreamReader(connection.getInputStream())).getAsJsonObject().get("msg").toString().replace("\"","");
+        String result = (String)JsonParser.parseReader(new InputStreamReader(connection.getInputStream())).getAsJsonObject().get("msg").toString().replace("\"","");
+        connection.disconnect();
+        return result;
 	}
 	//获取下一条待处理的消息
 	public JsonObject getNextMessage() throws IOException,MalformedURLException,ProtocolException{
@@ -87,12 +91,14 @@ public class BotCore{
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
         connection.setRequestProperty("Charset", "UTF-8");
-        connection.setRequestProperty("Connection", "Keep-Alive");
+        //connection.setRequestProperty("Connection", "Keep-Alive");
         connection.setUseCaches(false);
         JsonObject result = JsonParser.parseReader(new InputStreamReader(connection.getInputStream())).getAsJsonObject();
         if(result.get("code").toString().equals("0")){
+        	connection.disconnect();
         	return result;
         }else{
+        	connection.disconnect();
         	return null;
         }
 	}
@@ -103,12 +109,14 @@ public class BotCore{
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
         connection.setRequestProperty("Charset", "UTF-8");
-        connection.setRequestProperty("Connection", "Keep-Alive");
+        //connection.setRequestProperty("Connection", "Keep-Alive");
         connection.setUseCaches(false);
         JsonObject result = JsonParser.parseReader(new InputStreamReader(connection.getInputStream())).getAsJsonObject();
 		if(result.get("code").toString().equals("0")){
+			connection.disconnect();
         	return Integer.parseInt(result.get("data").toString());
         }else{
+        	connection.disconnect();
         	return 0;
         }
 	}
@@ -134,12 +142,14 @@ public class BotCore{
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
         connection.setRequestProperty("Charset", "UTF-8");
-        connection.setRequestProperty("Connection", "Keep-Alive");
+        //connection.setRequestProperty("Connection", "Keep-Alive");
         connection.setUseCaches(false);
         connection.setDoOutput(true);
         data.addProperty("sessionKey",session);
         connection.getOutputStream().write(data.toString().getBytes(StandardCharsets.UTF_8));
-        return JsonParser.parseReader(new InputStreamReader(connection.getInputStream())).getAsJsonObject();
+        JsonObject result = JsonParser.parseReader(new InputStreamReader(connection.getInputStream())).getAsJsonObject();
+        connection.disconnect();
+        return result;
 	}
 	//发送群消息
 	public JsonObject sendGroupMessage(JsonObject data) throws IOException,MalformedURLException,ProtocolException{
@@ -148,12 +158,14 @@ public class BotCore{
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
         connection.setRequestProperty("Charset", "UTF-8");
-        connection.setRequestProperty("Connection", "Keep-Alive");
+        //connection.setRequestProperty("Connection", "Keep-Alive");
         connection.setUseCaches(false);
         connection.setDoOutput(true);
         data.addProperty("sessionKey",session);
         connection.getOutputStream().write(data.toString().getBytes(StandardCharsets.UTF_8));
-        return JsonParser.parseReader(new InputStreamReader(connection.getInputStream())).getAsJsonObject();
+        JsonObject result = JsonParser.parseReader(new InputStreamReader(connection.getInputStream())).getAsJsonObject();
+        connection.disconnect();
+        return result;
 	}
 	//戳一戳
 	public JsonObject nudge(JsonObject data) throws IOException,MalformedURLException,ProtocolException{
@@ -162,12 +174,14 @@ public class BotCore{
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
         connection.setRequestProperty("Charset", "UTF-8");
-        connection.setRequestProperty("Connection", "Keep-Alive");
+        //connection.setRequestProperty("Connection", "Keep-Alive");
         connection.setUseCaches(false);
         connection.setDoOutput(true);
         data.addProperty("sessionKey",session);
         connection.getOutputStream().write(data.toString().getBytes(StandardCharsets.UTF_8));
-        return JsonParser.parseReader(new InputStreamReader(connection.getInputStream())).getAsJsonObject();
+        JsonObject result = JsonParser.parseReader(new InputStreamReader(connection.getInputStream())).getAsJsonObject();
+        connection.disconnect();
+        return result;
 	}
 	
 	public boolean addListener(Listener listener) {

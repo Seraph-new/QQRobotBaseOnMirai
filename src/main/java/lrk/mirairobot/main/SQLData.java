@@ -12,8 +12,8 @@ public class SQLData
     public SQLData() throws Exception{
         
         Class.forName("org.sqlite.JDBC");
-        sql = DriverManager.getConnection("jdbc:sqlite:"+DataBridge.HOME.getPath()+"/Data.db");
-        File database = new File(DataBridge.HOME.getPath()+"/Data.db");
+        sql = DriverManager.getConnection("jdbc:sqlite:"+DataBridge.HOME.getPath()+"/RobotData.db");
+        File database = new File(DataBridge.HOME.getPath()+"/RobotData.db");
         if(database.length()==0){
             sqldata = sql.createStatement();
             sqldata.execute("CREATE TABLE UserReg(ID LONG PRIMARY KEY NOT NULL,REG_TIME DATE NOT NULL,ABLED TEXT NOT NULL,PermissionGroup TEXT NOT NULL);");

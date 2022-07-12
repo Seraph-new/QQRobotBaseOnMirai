@@ -6,6 +6,7 @@ import lrk.mirairobot.core.data.messagetype.*;
 import lrk.mirairobot.utils.*;
 import lrk.mirairobot.core.event.*;
 import lrk.mirairobot.main.threads.RobotThread;
+import lrk.mirairobot.main.*;
 
 import java.lang.*;
 import java.io.*;
@@ -24,7 +25,7 @@ public class GroupMessageThread extends RobotThread{
 		try{
 			main();
 		}catch(Exception e1){
-			System.out.println(e1.getMessage());
+			RobotNotification.Warnning(e1.toString());
 		}
 	}
 	private void main() throws Exception{
@@ -36,13 +37,10 @@ public class GroupMessageThread extends RobotThread{
         			for(int i = 0;i < Integer.parseInt(message.split("&")[1].split("count=")[1]);i++){
             			int index = (int)(Math.random()*piclist.length);
         				if(piclist[index] != null){
-        					event.reply(new Image(null,null,null,DataBridge.getFileBase64(piclist[index].getPath())));
+        					event.reply(new At(event.getSender(),event.getSenderNickName()),new Image(null,null,null,DataBridge.getFileBase64(piclist[index].getPath())));
         				}
     				}
     				break;
-        		}
-        		case "/AtAll":{
-        			event.reply(new AtAll(),new Plain(message.split("&")[1].split("message=")[1]));
         		}
         		default:{
             		if(word_normal.containsKey(message)){
